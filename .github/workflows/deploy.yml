@@ -52,6 +52,20 @@ jobs:
 
       - name: Build with Next.js
         run: pnpm build
+        env:
+          NODE_ENV: production
+
+      - name: List contents after build
+        run: |
+          ls -la
+          if [ -d "out" ]; then
+            echo "✅ out directory exists"
+            ls -la out/
+          else
+            echo "❌ out directory does not exist"
+            echo "Contents of .next directory:"
+            ls -la .next/ || echo ".next directory does not exist either"
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
