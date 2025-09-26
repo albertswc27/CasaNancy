@@ -27,8 +27,11 @@ export function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-12 md:py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section className="relative py-12 md:py-20 overflow-hidden">
+      {/* El Salvador flag inspired gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Lo Que Dicen Nuestros Clientes</h2>
           <p className="text-lg md:text-xl text-muted-foreground">

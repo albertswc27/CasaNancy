@@ -5,21 +5,22 @@ export function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative bg-gradient-to-br from-secondary via-background to-muted py-12 md:py-20 lg:py-32 overflow-hidden"
+      className="relative py-12 md:py-20 lg:py-32 overflow-hidden"
     >
-      <div className="absolute inset-0 opacity-10">
+      {/* El Salvador flag inspired gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
+      
+      <div className="absolute inset-0 opacity-5">
         <img
           src="/images/bandera-el-salvador.webp"
           alt=""
-          className="w-full h-full object-cover filter grayscale-[30%] saturate-50"
+          className="w-full h-full object-cover filter grayscale-[20%] saturate-30"
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary/80 via-background/90 to-muted/80"></div>
-      {/* </CHANGE> */}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="space-y-6 md:space-y-8 text-center lg:text-left">
+          <div className="space-y-6 md:space-y-8 text-center lg:text-left order-first lg:order-first">
             <div className="space-y-4">
               <div className="flex items-center justify-center lg:justify-start space-x-3 md:space-x-4 mb-4 md:mb-6">
                 <img
@@ -81,8 +82,8 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative order-first lg:order-last">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
+          <div className="relative order-last lg:order-last">
+            <div className="aspect-[4/3] md:aspect-square rounded-2xl overflow-hidden bg-muted max-w-sm mx-auto lg:max-w-none">
               <img
                 src="/authentic-salvadoran-pupusas-on-traditional-plate-.jpg"
                 alt="Pupusas tradicionales de Casa Nancy"

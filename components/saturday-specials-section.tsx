@@ -47,8 +47,11 @@ export function SaturdaySpecialsSection() {
   ]
 
   return (
-    <section id="especiales-sabado" className="py-20 bg-card">
-      <div className="container mx-auto px-4">
+    <section id="especiales-sabado" className="relative py-20 overflow-hidden">
+      {/* El Salvador flag inspired gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Calendar className="h-8 w-8 text-primary" />

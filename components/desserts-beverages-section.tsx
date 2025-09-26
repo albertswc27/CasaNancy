@@ -22,8 +22,11 @@ export function DessertsBeveragesSection() {
   ]
 
   return (
-    <section id="postres-bebidas" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="postres-bebidas" className="relative py-20 overflow-hidden">
+      {/* El Salvador flag inspired gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Postres y Bebidas</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
