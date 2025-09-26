@@ -71,7 +71,7 @@ export function TestimonialsSection() {
                 <Star key={i} className="h-4 w-4 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="font-semibold text-sm md:text-base">4.6/5</span>
+            <span className="font-semibold text-sm md:text-base">4.7/5</span>
             <span className="text-muted-foreground text-xs md:text-sm">• 205 reseñas en Google</span>
           </div>
         </div>
