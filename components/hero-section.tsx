@@ -53,16 +53,23 @@ export function HeroSection() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <Button size="lg" className="text-base md:text-lg px-6 md:px-8 w-full sm:w-auto">
-                Ver Nuestro Menú
+              <Button 
+                size="lg" 
+                className="text-base md:text-lg px-6 md:px-8 w-full sm:w-auto"
+                asChild
+              >
+                <a href="#menu">Ver Nuestro Menú</a>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
                 className="text-base md:text-lg px-6 md:px-8 bg-transparent w-full sm:w-auto"
+                asChild
               >
-                <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                Cómo Llegar
+                <a href="#contacto">
+                  <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2" />
+                  Cómo Llegar
+                </a>
               </Button>
             </div>
 

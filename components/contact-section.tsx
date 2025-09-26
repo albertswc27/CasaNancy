@@ -128,8 +128,9 @@ export function ContactSection() {
                     variant="outline"
                     size="lg"
                     className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent text-sm md:text-base"
+                    asChild
                   >
-                    Ver Menú Completo
+                    <a href="#menu">Ver Menú Completo</a>
                   </Button>
                 </div>
               </CardContent>
