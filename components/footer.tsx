@@ -1,4 +1,4 @@
-import { MapPin, Phone, Facebook, Instagram } from "lucide-react"
+import { MapPin, Phone, Instagram } from "lucide-react"
 
 export function Footer() {
   return (
@@ -19,12 +19,14 @@ export function Footer() {
               Salvador.
             </p>
             <div className="flex space-x-4">
-              <div className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition-colors cursor-pointer">
-                <Facebook className="h-5 w-5" />
-              </div>
-              <div className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition-colors cursor-pointer">
+              <a 
+                href="https://www.instagram.com/pupuseria_casa_nancy" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition-colors cursor-pointer"
+              >
                 <Instagram className="h-5 w-5" />
-              </div>
+              </a>
             </div>
           </div>
 

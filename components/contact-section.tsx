@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Phone, MessageCircle, Instagram, Facebook } from "lucide-react"
+import { MapPin, Phone, MessageCircle, Instagram } from "lucide-react"
 
 export function ContactSection() {
   return (
@@ -79,18 +79,16 @@ export function ContactSection() {
                   <div className="flex-1">
                     <h3 className="font-semibold text-base md:text-lg mb-2">Síguenos</h3>
                     <p className="text-sm md:text-base text-muted-foreground mb-3">
-                      Instagram, Facebook y TikTok: <strong>Pupuseria Casa Nancy</strong>
+                      Instagram y TikTok: <strong>@pupuseria_casa_nancy</strong>
                       <br />
                       Google Maps: <strong>Casa Nancy</strong>
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent">
-                        <Instagram className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-                        Instagram
-                      </Button>
-                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent">
-                        <Facebook className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-                        Facebook
+                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent" asChild>
+                        <a href="https://www.instagram.com/pupuseria_casa_nancy" target="_blank" rel="noopener noreferrer">
+                          <Instagram className="h-3 w-3 md:h-4 md:w-4 mr-2" />
+                          Instagram
+                        </a>
                       </Button>
                     </div>
                   </div>
