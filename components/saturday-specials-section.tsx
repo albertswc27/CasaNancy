@@ -70,12 +70,12 @@ export function SaturdaySpecialsSection() {
               <Phone className="h-4 w-4 text-primary" />
               <span>Agréganos: </span>
               <a
-                href="https://wa.me/34123456789"
+                href="https://wa.me/34635446435"
                 className="text-primary hover:text-primary/80 transition-colors font-bold"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                +34 123 456 789
+                +34 635 446 435
               </a>
             </div>
           </div>

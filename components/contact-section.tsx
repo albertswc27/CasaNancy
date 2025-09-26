@@ -79,7 +79,7 @@ export function ContactSection() {
                   <div className="flex-1">
                     <h3 className="font-semibold text-base md:text-lg mb-2">Síguenos</h3>
                     <p className="text-sm md:text-base text-muted-foreground mb-3">
-                      Instagram y TikTok: <strong>@pupuseria_casa_nancy</strong>
+                      Instagram: <strong>@pupuseria_casa_nancy</strong>
                       <br />
                       Google Maps: <strong>Casa Nancy</strong>
                     </p>
