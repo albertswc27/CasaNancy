@@ -50,21 +50,32 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build with Next.js
+      - name: Build with Next.js (with static export)
         run: pnpm build
         env:
           NODE_ENV: production
 
       - name: List contents after build
         run: |
+          echo "=== Root directory ==="
           ls -la
+          echo ""
           if [ -d "out" ]; then
             echo "✅ out directory exists"
+            echo "Contents of out directory:"
             ls -la out/
+            echo ""
+            echo "Sample files in out:"
+            find out -type f -name "*.html" | head -5
           else
             echo "❌ out directory does not exist"
+          fi
+          echo ""
+          if [ -d ".next" ]; then
             echo "Contents of .next directory:"
-            ls -la .next/ || echo ".next directory does not exist either"
+            ls -la .next/
+          else
+            echo ".next directory does not exist either"
           fi
 
       - name: Upload artifact
