@@ -45,14 +45,18 @@ export function Header() {
           </nav>
 
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" className="hidden md:flex bg-transparent text-xs md:text-sm">
-              <Phone className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
-              <span className="hidden sm:inline">+34 635 44 64 35</span>
-              <span className="sm:hidden">Llamar</span>
+            <Button variant="outline" size="sm" className="hidden md:flex bg-transparent text-xs md:text-sm" asChild>
+              <a href="tel:+34635446435">
+                <Phone className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">+34 635 44 64 35</span>
+                <span className="sm:hidden">Llamar</span>
+              </a>
             </Button>
-            <Button size="sm" className="text-xs md:text-sm px-2 md:px-4">
-              <span className="hidden sm:inline">Reservar Mesa</span>
-              <span className="sm:hidden">Reservar</span>
+            <Button size="sm" className="text-xs md:text-sm px-2 md:px-4" asChild>
+              <a href="https://wa.me/34635446435?text=Hola!%20Me%20gustar%C3%ADa%20reservar%20mesa%20en%20Casa%20Nancy.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener noreferrer">
+                <span className="hidden sm:inline">Reservar Mesa</span>
+                <span className="sm:hidden">Reservar</span>
+              </a>
             </Button>
 
             <Button variant="ghost" size="sm" className="lg:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>

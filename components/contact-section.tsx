@@ -49,12 +49,14 @@ export function ContactSection() {
                     <p className="text-sm md:text-base text-muted-foreground mb-1">📞 Fijo: 935 348 029</p>
                     <p className="text-sm md:text-base text-muted-foreground mb-3">📱 Móvil/WhatsApp: 635 446 435</p>
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent">
-                        Llamar Ahora
+                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent" asChild>
+                        <a href="tel:+34935348029">Llamar Ahora</a>
                       </Button>
-                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent">
-                        <MessageCircle className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-                        WhatsApp
+                      <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent" asChild>
+                        <a href="https://wa.me/34635446435?text=Hola!%20Me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20Casa%20Nancy" target="_blank" rel="noopener noreferrer">
+                          <MessageCircle className="h-3 w-3 md:h-4 md:w-4 mr-2" />
+                          WhatsApp
+                        </a>
                       </Button>
                     </div>
                   </div>
@@ -121,8 +123,10 @@ export function ContactSection() {
                   Ven a disfrutar del verdadero sabor de El Salvador en un ambiente familiar y acogedor.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
-                  <Button variant="secondary" size="lg" className="text-sm md:text-base">
-                    Haz tu pedido por WhatsApp
+                  <Button variant="secondary" size="lg" className="text-sm md:text-base" asChild>
+                    <a href="https://wa.me/34635446435?text=Hola!%20Me%20gustar%C3%ADa%20hacer%20un%20pedido.%20%C2%BFPueden%20enviarme%20el%20men%C3%BA%3F" target="_blank" rel="noopener noreferrer">
+                      Haz tu pedido por WhatsApp
+                    </a>
                   </Button>
                   <Button
                     variant="outline"
