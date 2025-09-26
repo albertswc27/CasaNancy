@@ -30,8 +30,14 @@ export function ContactSection() {
                       <br />
                       Barcelona, España
                     </p>
-                    <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent">
-                      Ver en Google Maps
+                    <Button variant="outline" size="sm" className="text-xs md:text-sm bg-transparent" asChild>
+                      <a 
+                        href="https://www.google.com/maps/search/?api=1&query=Carrer+de+la+Mare+de+D%C3%A9u+de+Montserrat,+16,+08922+Santa+Coloma+de+Gramenet,+Barcelona" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        Ver en Google Maps
+                      </a>
                     </Button>
                   </div>
                 </div>
