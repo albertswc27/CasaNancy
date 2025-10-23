@@ -49,7 +49,7 @@ export function HeroSection() {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
                 ))}
-                <span className="ml-2 text-sm font-medium">4.7/5 (205 reseñas)</span>
+                <span className="ml-2 text-sm font-medium">4.7/5 (+300 reseñas)</span>
               </div>
             </div>
 
