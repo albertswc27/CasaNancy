@@ -81,7 +81,7 @@ export function AboutSection() {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Star className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
-                  <span className="font-medium text-sm md:text-base">4.7/5 estrellas - 205 reseñas</span>
+                  <span className="font-medium text-sm md:text-base">4.7/5 estrellas - +300 reseñas</span>
                 </div>
               </div>
             </div>
