@@ -72,7 +72,7 @@ export function TestimonialsSection() {
               ))}
             </div>
             <span className="font-semibold text-sm md:text-base">4.7/5</span>
-            <span className="text-muted-foreground text-xs md:text-sm">• 205 reseñas en Google</span>
+            <span className="text-muted-foreground text-xs md:text-sm">• +300 reseñas en Google</span>
           </div>
         </div>
       </div>
