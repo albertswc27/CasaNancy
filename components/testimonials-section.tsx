@@ -35,7 +35,7 @@ export function TestimonialsSection() {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Lo Que Dicen Nuestros Clientes</h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Más de 205 reseñas nos avalan como el mejor sabor salvadoreño de la zona
+            Más de 300 reseñas nos avalan como el mejor sabor salvadoreño de la zona
           </p>
         </div>
 
