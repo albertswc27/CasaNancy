@@ -12,18 +12,18 @@ export function HoursSection() {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 60000)
-    
     return () => clearInterval(timer)
   }, [])
 
+  // ✨ HORARIO ACTUALIZADO
   const schedule = [
     { day: "Lunes", dayIndex: 1, hours: "Cerrado", closed: true },
     { day: "Martes", dayIndex: 2, hours: "Cerrado", closed: true },
-    { day: "Miércoles", dayIndex: 3, hours: "12:00-16:00 • 19:00-22:00", openTimes: [{start: '12:00', end: '16:00'}, {start: '19:00', end: '22:00'}] },
-    { day: "Jueves", dayIndex: 4, hours: "12:00-16:00 • 19:00-22:00", openTimes: [{start: '12:00', end: '16:00'}, {start: '19:00', end: '22:00'}] },
-    { day: "Viernes", dayIndex: 5, hours: "12:00-16:00 • 19:00-22:00", openTimes: [{start: '12:00', end: '16:00'}, {start: '19:00', end: '22:00'}], special: "¡Tamales especiales!" },
-    { day: "Sábado", dayIndex: 6, hours: "12:00-17:00 • 19:00-23:00", openTimes: [{start: '12:00', end: '17:00'}, {start: '19:00', end: '23:00'}], special: "¡Platos especiales!" },
-    { day: "Domingo", dayIndex: 0, hours: "12:00-17:30", openTimes: [{start: '12:00', end: '17:30'}], special: "¡Sopa de Pata!" },
+    { day: "Miércoles", dayIndex: 3, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }] },
+    { day: "Jueves", dayIndex: 4, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }] },
+    { day: "Viernes", dayIndex: 5, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }], special: "¡Tamales especiales!" },
+    { day: "Sábado", dayIndex: 6, hours: "09:00-17:00 • 19:00-23:00", openTimes: [{ start: "09:00", end: "17:00" }, { start: "19:00", end: "23:00" }], special: "¡Platos especiales!" },
+    { day: "Domingo", dayIndex: 0, hours: "09:00-17:30", openTimes: [{ start: "09:00", end: "17:30" }], special: "¡Sopa de Pata!" },
   ]
 
   const getCurrentDayIndex = () => currentTime.getDay()
@@ -50,17 +50,16 @@ export function HoursSection() {
     const currentTimeStr = getCurrentTimeString()
     const todaySchedule = schedule.find(s => s.dayIndex === currentDayIndex)
     
-    if (!todaySchedule || todaySchedule.closed) {
+    if (!todaySchedule || (todaySchedule as any).closed) {
       return { status: 'closed', message: 'Cerrado hoy', color: 'text-muted-foreground' }
     }
 
-    const isOpen = todaySchedule.openTimes?.some(time => 
+    const isOpen = (todaySchedule as any).openTimes?.some((time: any) => 
       isTimeInRange(currentTimeStr, time.start, time.end)
     ) || false
 
     if (isOpen) {
-      // Encontrar cuando cierra
-      const currentPeriod = todaySchedule.openTimes?.find(time => 
+      const currentPeriod = (todaySchedule as any).openTimes?.find((time: any) => 
         isTimeInRange(currentTimeStr, time.start, time.end)
       )
       if (currentPeriod) {
@@ -72,8 +71,7 @@ export function HoursSection() {
       }
     }
 
-    // Encontrar próxima apertura
-    const nextOpening = todaySchedule.openTimes?.find(time => {
+    const nextOpening = (todaySchedule as any).openTimes?.find((time: any) => {
       const [hours, minutes] = time.start.split(':').map(Number)
       const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number)
       const startMinutes = hours * 60 + minutes
@@ -97,17 +95,13 @@ export function HoursSection() {
 
   return (
     <section id="horarios" className="relative py-12 md:py-20 overflow-hidden">
-      {/* El Salvador flag inspired gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
-      
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Horarios de Atención</h2>
           <p className="text-lg md:text-xl text-muted-foreground">
             Te esperamos con los brazos abiertos y las pupusas calentitas
           </p>
-          
-          {/* Estado actual en tiempo real */}
           <div className={`inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-background border ${restaurantStatus.color}`}>
             <div className={`w-2 h-2 rounded-full ${restaurantStatus.status === 'open' ? 'bg-green-500' : 'bg-gray-400'} ${restaurantStatus.status === 'open' ? 'animate-pulse' : ''}`}></div>
             <span className="font-medium text-sm md:text-base">{restaurantStatus.message}</span>
@@ -131,7 +125,7 @@ export function HoursSection() {
                     className={`flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 rounded-lg transition-colors space-y-1 sm:space-y-0 ${
                       isToday
                         ? "bg-primary/10 border border-primary/20"
-                        : item.closed
+                        : (item as any).closed
                           ? "bg-muted/50"
                           : "bg-background"
                     }`}
@@ -148,11 +142,11 @@ export function HoursSection() {
                     </div>
                     <div className="text-left sm:text-right">
                       <div
-                        className={`font-medium text-sm md:text-base ${item.closed ? "text-muted-foreground" : "text-foreground"}`}
+                        className={`font-medium text-sm md:text-base ${(item as any).closed ? "text-muted-foreground" : "text-foreground"}`}
                       >
                         {item.hours}
                       </div>
-                      {item.special && <div className="text-xs text-accent font-medium">{item.special}</div>}
+                      {(item as any).special && <div className="text-xs text-accent font-medium">{(item as any).special}</div>}
                     </div>
                   </div>
                 )
