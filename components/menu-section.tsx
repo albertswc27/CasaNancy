@@ -68,10 +68,10 @@ export function MenuSection() {
         {
           name: "Tamales (Viernes)",
           description: "Rellenos de Pollo, Gallina o Costilla - 3 unidades",
-          price: "10,00€",
+          price: "12,50€",
           popular: false,
           special: true,
-          note: "Unidad: 4,00€",
+          note: "Unidad: 5,00€",
           image: "/images/tamales-costilla.jpg",
         },
       ],

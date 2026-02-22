@@ -24,6 +24,13 @@ export function TestimonialsSection() {
       location: "Local Guide • Barcelona",
       timeAgo: "Hace 9 meses",
     },
+    {
+      name: "SuperGirl Levenstein",
+      text: "Recientemente coordiné un intercambio gastronómico cultural para mi oficina y elegí a Casa Nancy para representar a El Salvador. Decir que 'la arrasó' sería quedarse corto. Pedimos una gran variedad de platillos, desde las pupusas (queso y frijoles) a la parrilla, perfectas, hasta los dulces y aterciopelados tamales de elote, curtido (picante y suave) y la crujiente yuca con costilla. ¡Nos comimos hasta el último bocado! ¡Nuestro equipo devoró la comida! Una de mis compañeras incluso se emocionó hasta las lágrimas con el queso blanco que sirvieron con la yuca, diciendo que sabía exactamente como 'en casa' y estaba desesperada por encontrar a su proveedor. (Las fotos no le hacen justicia, ya que tuve que mantener las cosas tapadas para que se calentaran hasta que comimos). En lo personal, compartí mi propia experiencia de adopción en El Salvador durante este almuerzo, y disfrutar de la comida de Nancy hizo que la experiencia fuera realmente completa. Se nota que todo está preparado con amor genuino y técnicas tradicionales. Si buscas la comida salvadoreña más auténtica en Barcelona, ​​no busques más. Gracias, Nancy, por ayudarme a compartir mi herencia tan bellamente. ¡Sin duda volveremos!",
+      rating: 5,
+      location: "Local Guide · 49 reseñas · 247 fotos",
+      timeAgo: "Hace un día",
+    },
   ]
 
   return (
@@ -35,7 +42,7 @@ export function TestimonialsSection() {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Lo Que Dicen Nuestros Clientes</h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Más de 205 reseñas nos avalan como el mejor sabor salvadoreño de la zona
+            Más de 377 reseñas nos avalan como el mejor sabor salvadoreño de la zona
           </p>
         </div>
 
@@ -71,8 +78,8 @@ export function TestimonialsSection() {
                 <Star key={i} className="h-4 w-4 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="font-semibold text-sm md:text-base">4.6/5</span>
-            <span className="text-muted-foreground text-xs md:text-sm">• 205 reseñas en Google</span>
+            <span className="font-semibold text-sm md:text-base">4.8/5</span>
+            <span className="text-muted-foreground text-xs md:text-sm">• 377 reseñas en Google</span>
           </div>
         </div>
       </div>
