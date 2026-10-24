@@ -1,177 +1,92 @@
-'use client'
+import { Clock, CalendarCheck, Sun, Users, MessageCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { SectionHeading } from "@/components/section-heading"
+import { Reveal } from "@/components/reveal"
+import { OpenStatusPill } from "@/components/open-status-pill"
+import { WeeklySchedule } from "@/components/weekly-schedule"
+import { breakfast, whatsapp } from "@/lib/business"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, Calendar } from "lucide-react"
-import { useState, useEffect } from "react"
+const INFO_CARDS = [
+  {
+    icon: Sun,
+    tone: "bg-gold/25 text-foreground",
+    title: "Desayunos",
+    text: `${breakfast.days}, de ${breakfast.hours}.`,
+  },
+  {
+    icon: Users,
+    tone: "bg-accent/10 text-accent",
+    title: "Reservas",
+    text: "Recomendamos reservar para grupos de 6 o más personas.",
+  },
+  {
+    icon: Clock,
+    tone: "bg-destructive/10 text-destructive",
+    title: "Última orden",
+    text: "30 minutos antes del cierre de cada turno.",
+  },
+]
 
 export function HoursSection() {
-  const [currentTime, setCurrentTime] = useState(new Date())
-  
-  // Actualizar cada minuto
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 60000)
-    return () => clearInterval(timer)
-  }, [])
-
-  // ✨ HORARIO ACTUALIZADO
-  const schedule = [
-    { day: "Lunes", dayIndex: 1, hours: "Cerrado", closed: true },
-    { day: "Martes", dayIndex: 2, hours: "Cerrado", closed: true },
-    { day: "Miércoles", dayIndex: 3, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }] },
-    { day: "Jueves", dayIndex: 4, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }] },
-    { day: "Viernes", dayIndex: 5, hours: "09:00-16:00 • 19:00-22:00", openTimes: [{ start: "09:00", end: "16:00" }, { start: "19:00", end: "22:00" }], special: "¡Tamales especiales!" },
-    { day: "Sábado", dayIndex: 6, hours: "09:00-17:00 • 19:00-23:00", openTimes: [{ start: "09:00", end: "17:00" }, { start: "19:00", end: "23:00" }], special: "¡Platos especiales!" },
-    { day: "Domingo", dayIndex: 0, hours: "09:00-17:30", openTimes: [{ start: "09:00", end: "17:30" }], special: "¡Sopa de Pata!" },
-  ]
-
-  const getCurrentDayIndex = () => currentTime.getDay()
-  const getCurrentTimeString = () => {
-    const hours = currentTime.getHours().toString().padStart(2, '0')
-    const minutes = currentTime.getMinutes().toString().padStart(2, '0')
-    return `${hours}:${minutes}`
-  }
-
-  const isTimeInRange = (timeStr: string, startTime: string, endTime: string): boolean => {
-    const [hours, minutes] = timeStr.split(':').map(Number)
-    const [startHours, startMinutes] = startTime.split(':').map(Number)
-    const [endHours, endMinutes] = endTime.split(':').map(Number)
-    
-    const currentMinutes = hours * 60 + minutes
-    const startMinutesTotal = startHours * 60 + startMinutes
-    const endMinutesTotal = endHours * 60 + endMinutes
-    
-    return currentMinutes >= startMinutesTotal && currentMinutes <= endMinutesTotal
-  }
-
-  const getRestaurantStatus = () => {
-    const currentDayIndex = getCurrentDayIndex()
-    const currentTimeStr = getCurrentTimeString()
-    const todaySchedule = schedule.find(s => s.dayIndex === currentDayIndex)
-    
-    if (!todaySchedule || (todaySchedule as any).closed) {
-      return { status: 'closed', message: 'Cerrado hoy', color: 'text-muted-foreground' }
-    }
-
-    const isOpen = (todaySchedule as any).openTimes?.some((time: any) => 
-      isTimeInRange(currentTimeStr, time.start, time.end)
-    ) || false
-
-    if (isOpen) {
-      const currentPeriod = (todaySchedule as any).openTimes?.find((time: any) => 
-        isTimeInRange(currentTimeStr, time.start, time.end)
-      )
-      if (currentPeriod) {
-        return { 
-          status: 'open', 
-          message: `Abierto • Cierra a las ${currentPeriod.end}`, 
-          color: 'text-green-600' 
-        }
-      }
-    }
-
-    const nextOpening = (todaySchedule as any).openTimes?.find((time: any) => {
-      const [hours, minutes] = time.start.split(':').map(Number)
-      const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number)
-      const startMinutes = hours * 60 + minutes
-      const currentMinutesTotal = currentHours * 60 + currentMinutes
-      return startMinutes > currentMinutesTotal
-    })
-
-    if (nextOpening) {
-      return { 
-        status: 'closed', 
-        message: `Cerrado • Abre a las ${nextOpening.start}`, 
-        color: 'text-orange-600' 
-      }
-    }
-
-    return { status: 'closed', message: 'Cerrado', color: 'text-muted-foreground' }
-  }
-
-  const restaurantStatus = getRestaurantStatus()
-  const currentDayIndex = getCurrentDayIndex()
-
   return (
-    <section id="horarios" className="relative py-12 md:py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Horarios de Atención</h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            Te esperamos con los brazos abiertos y las pupusas calentitas
-          </p>
-          <div className={`inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-background border ${restaurantStatus.color}`}>
-            <div className={`w-2 h-2 rounded-full ${restaurantStatus.status === 'open' ? 'bg-green-500' : 'bg-gray-400'} ${restaurantStatus.status === 'open' ? 'animate-pulse' : ''}`}></div>
-            <span className="font-medium text-sm md:text-base">{restaurantStatus.message}</span>
-          </div>
-        </div>
+    <section id="horarios" className="relative overflow-hidden bg-sky">
+      <div className="absolute inset-0 pattern-dots text-primary/[0.06]" aria-hidden="true" />
+      <div className="absolute -left-24 bottom-0 size-80 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
 
-        <div className="max-w-2xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
-                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                Horario Semanal
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 md:space-y-4">
-              {schedule.map((item, index) => {
-                const isToday = item.dayIndex === currentDayIndex
-                return (
-                  <div
-                    key={index}
-                    className={`flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 rounded-lg transition-colors space-y-1 sm:space-y-0 ${
-                      isToday
-                        ? "bg-primary/10 border border-primary/20"
-                        : (item as any).closed
-                          ? "bg-muted/50"
-                          : "bg-background"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <span
-                        className={`font-medium text-sm md:text-base ${isToday ? "text-primary" : "text-foreground"}`}
-                      >
-                        {item.day}
-                      </span>
-                      {isToday && (
-                        <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">Hoy</span>
-                      )}
-                    </div>
-                    <div className="text-left sm:text-right">
-                      <div
-                        className={`font-medium text-sm md:text-base ${(item as any).closed ? "text-muted-foreground" : "text-foreground"}`}
-                      >
-                        {item.hours}
-                      </div>
-                      {(item as any).special && <div className="text-xs text-accent font-medium">{(item as any).special}</div>}
-                    </div>
+      <div className="container relative mx-auto px-4 py-20 md:py-28">
+        <SectionHeading
+          eyebrow="Horarios"
+          title={
+            <>
+              Te esperamos con las pupusas <em className="text-primary">calentitas</em>
+            </>
+          }
+          description="Abrimos de miércoles a domingo. Consulta el horario de hoy y ven cuando quieras: siempre hay un sitio en nuestra mesa."
+        />
+
+        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+          <Reveal>
+            <div className="rounded-[2rem] border border-foreground/[0.06] bg-white p-3 shadow-soft md:p-5">
+              <div className="flex flex-col gap-3 px-3 pb-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+                <h3 className="flex items-center gap-2 text-xl font-semibold">
+                  <CalendarCheck className="size-5 text-primary" aria-hidden="true" />
+                  Horario semanal
+                </h3>
+                <OpenStatusPill />
+              </div>
+              <WeeklySchedule />
+            </div>
+          </Reveal>
+
+          <div className="flex flex-col gap-4">
+            {INFO_CARDS.map((card, i) => (
+              <Reveal key={card.title} delay={100 + i * 80}>
+                <div className="flex items-start gap-4 rounded-3xl border border-foreground/[0.06] bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
+                  <span className={`flex size-11 shrink-0 items-center justify-center rounded-2xl ${card.tone}`}>
+                    <card.icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="font-semibold">{card.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{card.text}</p>
                   </div>
-                )
-              })}
-            </CardContent>
-          </Card>
+                </div>
+              </Reveal>
+            ))}
 
-          <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            <Card>
-              <CardContent className="p-4 md:p-6 text-center">
-                <Calendar className="h-6 w-6 md:h-8 md:w-8 text-accent mx-auto mb-2 md:mb-3" />
-                <h3 className="font-semibold mb-2 text-sm md:text-base">Reservas</h3>
-                <p className="text-xs md:text-sm text-muted-foreground">
-                  Recomendamos reservar para grupos de 6 o más personas
+            <Reveal delay={360}>
+              <div className="rounded-3xl bg-primary p-5 text-white shadow-lift">
+                <p className="font-display text-xl font-semibold">¿Vienes en grupo?</p>
+                <p className="mt-1 text-sm text-white/80">
+                  Escríbenos y te guardamos la mesa. Respondemos rápido por WhatsApp.
                 </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4 md:p-6 text-center">
-                <Clock className="h-6 w-6 md:h-8 md:w-8 text-destructive mx-auto mb-2 md:mb-3" />
-                <h3 className="font-semibold mb-2 text-sm md:text-base">Última Orden</h3>
-                <p className="text-xs md:text-sm text-muted-foreground">30 minutos antes del cierre</p>
-              </CardContent>
-            </Card>
+                <Button variant="inverted" size="sm" className="mt-4" asChild>
+                  <a href={whatsapp.reserve} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="size-4" aria-hidden="true" />
+                    Reservar mesa
+                  </a>
+                </Button>
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>

@@ -1,99 +1,146 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Phone, Star, Heart } from "lucide-react"
+import Image from "next/image"
+import { MapPin, Phone, Star, Heart, ChefHat, Leaf, Instagram } from "lucide-react"
+import { SectionHeading } from "@/components/section-heading"
+import { Reveal } from "@/components/reveal"
+import { Stars } from "@/components/stars"
+import { business } from "@/lib/business"
+
+const VALUES = [
+  {
+    icon: Heart,
+    tone: "bg-destructive/10 text-destructive",
+    title: "Ambiente familiar",
+    text: "Un espacio acogedor donde cada cliente es parte de nuestra familia salvadoreña.",
+  },
+  {
+    icon: ChefHat,
+    tone: "bg-primary/10 text-primary",
+    title: "Recetas de siempre",
+    text: "Tradición transmitida de generación en generación, preparada cada día con calma y cariño.",
+  },
+  {
+    icon: Leaf,
+    tone: "bg-accent/10 text-accent",
+    title: "Ingredientes auténticos",
+    text: "Masa de maíz, loroco, curtido fermentado y salsa roja de verdad. Como en casa.",
+  },
+]
 
 export function AboutSection() {
   return (
-    <section id="nosotros" className="relative py-12 md:py-20 overflow-hidden">
-      {/* El Salvador flag inspired gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12 md:mb-16">
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4 md:mb-6">
-            <img
-              src="/casa-nancy-logo.jpg"
-              alt="Casa Nancy Logo"
-              className="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover border-3 border-primary shadow-lg"
-            />
-            <div className="text-primary font-medium text-sm md:text-base">Pupusería Casa Nancy</div>
-          </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Sobre Casa Nancy</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Más que un restaurante, somos un pedacito de El Salvador en Barcelona. Tradición familiar, ingredientes
-            auténticos y el cariño de casa.
-          </p>
+    <section id="nosotros" className="relative overflow-hidden bg-cream">
+      <div className="absolute inset-0 pattern-dots text-primary/[0.05]" aria-hidden="true" />
+      <div className="container relative mx-auto px-4 py-20 md:py-28">
+        <SectionHeading
+          eyebrow="Nuestra casa"
+          title={
+            <>
+              Un pedacito de <em className="text-primary">El Salvador</em> en Barcelona
+            </>
+          }
+          description="Más que un restaurante, somos la mesa donde se juntan los sabores de nuestra tierra con el cariño de una familia. Aquí se come como en casa."
+        />
+
+        <div className="grid gap-5 md:grid-cols-3 md:gap-6">
+          {VALUES.map((value, i) => (
+            <Reveal key={value.title} delay={i * 90}>
+              <article className="group h-full rounded-3xl border border-foreground/[0.06] bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift md:p-7">
+                <span
+                  className={`inline-flex size-12 items-center justify-center rounded-2xl ${value.tone} transition-transform duration-300 group-hover:scale-110`}
+                >
+                  <value.icon className="size-6" aria-hidden="true" />
+                </span>
+                <h3 className="mt-5 text-xl font-semibold">{value.title}</h3>
+                <p className="mt-2 text-pretty leading-relaxed text-muted-foreground">{value.text}</p>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
-          <Card className="text-center">
-            <CardContent className="p-4 md:p-6">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                <Heart className="h-5 w-5 md:h-6 md:w-6 text-primary" />
-              </div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Ambiente Familiar</h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Un espacio acogedor donde cada cliente es parte de nuestra familia salvadoreña.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center">
-            <CardContent className="p-4 md:p-6">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                <Star className="h-5 w-5 md:h-6 md:w-6 text-accent" />
-              </div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Calidad Auténtica</h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                Recetas tradicionales transmitidas de generación en generación.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center md:col-span-2 lg:col-span-1">
-            <CardContent className="p-4 md:p-6">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
-                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-destructive" />
-              </div>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Ubicación Perfecta</h3>
-              <p className="text-sm md:text-base text-muted-foreground">
-                En el corazón de Santa Coloma, fácil acceso y ambiente tranquilo.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="bg-muted rounded-2xl p-6 md:p-8 lg:p-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-            <div className="order-2 lg:order-1">
-              <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Nuestra Historia</h3>
-              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 leading-relaxed">
-                Casa Nancy nació del sueño de compartir los auténticos sabores de El Salvador con la comunidad de
-                Barcelona. Cada pupusa que servimos lleva el amor y la tradición de nuestras raíces centroamericanas.
-              </p>
-              <div className="space-y-2 md:space-y-3">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary mt-0.5 flex-shrink-0" />
-                  <span className="font-medium text-sm md:text-base">Carrer de la Mare de Déu de Montserrat, 16</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
-                  <span className="font-medium text-sm md:text-base">+34 635 44 64 35</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Star className="h-4 w-4 md:h-5 md:w-5 text-primary flex-shrink-0" />
-                  <span className="font-medium text-sm md:text-base">4.7/5 estrellas - +300 reseñas</span>
-                </div>
-              </div>
-            </div>
-            <div className="aspect-video rounded-xl overflow-hidden bg-background order-1 lg:order-2">
-              <img
-                src="/casa-nancy-interior.jpg"
-                alt="Interior acogedor de Casa Nancy con murales tradicionales salvadoreños"
-                className="w-full h-full object-cover"
+        <Reveal delay={120} className="mt-14 md:mt-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="relative order-2 lg:order-1">
+              <div
+                className="absolute -inset-3 rotate-[-1.5deg] rounded-[2rem] bg-primary/10 md:-inset-4"
+                aria-hidden="true"
               />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-lift">
+                <Image
+                  src="/casa-nancy-interior.jpg"
+                  alt="Interior acogedor de Casa Nancy con murales tradicionales salvadoreños"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </div>
+              <div className="absolute -bottom-5 right-4 flex items-center gap-3 rounded-2xl border border-white/60 bg-white/95 px-4 py-3 shadow-lift backdrop-blur md:right-8">
+                <Stars rating={business.rating.value} size="size-4" />
+                <div className="leading-tight">
+                  <p className="font-display text-lg font-semibold">{business.rating.display} / 5</p>
+                  <p className="text-xs text-muted-foreground">{business.rating.count} reseñas en Google</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <p className="eyebrow text-accent">
+                <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
+                Nuestra historia
+              </p>
+              <h3 className="mt-4 text-balance text-3xl font-semibold leading-tight md:text-4xl">
+                Nació de un sueño: compartir los sabores de casa
+              </h3>
+              <p className="mt-5 text-pretty leading-relaxed text-muted-foreground md:text-lg">
+                Casa Nancy nació del deseo de compartir los auténticos sabores de El Salvador con la comunidad de
+                Barcelona. Cada pupusa que servimos lleva el amor y la tradición de nuestras raíces centroamericanas,
+                y cada mesa es una excusa para sentirse un poco más cerca de casa.
+              </p>
+
+              <ul className="mt-7 space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <MapPin className="size-4" aria-hidden="true" />
+                  </span>
+                  <span className="font-medium">
+                    {business.address.street}
+                    <span className="block text-sm font-normal text-muted-foreground">
+                      {business.address.postalCode} {business.address.city}, {business.address.region}
+                    </span>
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Phone className="size-4" aria-hidden="true" />
+                  </span>
+                  <a href={business.phone.mobileHref} className="font-medium transition-colors hover:text-primary">
+                    {business.phone.mobileIntl}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Instagram className="size-4" aria-hidden="true" />
+                  </span>
+                  <a
+                    href={business.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium transition-colors hover:text-primary"
+                  >
+                    {business.instagram.handle}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold/25 text-foreground">
+                    <Star className="size-4 fill-current text-gold" aria-hidden="true" />
+                  </span>
+                  <span className="font-medium">
+                    {business.rating.display} / 5 estrellas · {business.rating.count} reseñas en Google
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -4,72 +4,77 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Casa Nancy Brand Colors - Extracted from the authentic logo */
-  --background: oklch(0.99 0.005 85); /* Pure white background like logo circle */
-  --foreground: oklch(0.15 0.02 85); /* Deep text for contrast */
-  --card: oklch(1 0 0); /* Pure white cards */
-  --card-foreground: oklch(0.15 0.02 85);
+  /* Casa Nancy – paleta extraída del logotipo (azul real, verde, rojo, crema) */
+  --background: oklch(0.99 0.005 85);
+  --foreground: oklch(0.18 0.035 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.035 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 85);
+  --popover-foreground: oklch(0.18 0.035 265);
 
-  /* Primary: Exact royal blue from logo background */
-  --primary: oklch(0.35 0.28 260); /* Vibrant royal blue from Casa Nancy logo */
-  --primary-foreground: oklch(1 0 0); /* Pure white text on blue */
+  /* Azul real del logotipo */
+  --primary: oklch(0.4 0.27 264);
+  --primary-foreground: oklch(1 0 0);
 
-  /* Secondary: Warm cream for subtle backgrounds */
-  --secondary: oklch(0.96 0.01 85); /* Very light cream */
-  --secondary-foreground: oklch(0.15 0.02 85);
+  --secondary: oklch(0.96 0.012 85);
+  --secondary-foreground: oklch(0.18 0.035 265);
 
-  --muted: oklch(0.94 0.01 85);
-  --muted-foreground: oklch(0.45 0.02 85);
+  --muted: oklch(0.95 0.012 85);
+  --muted-foreground: oklch(0.46 0.025 265);
 
-  /* Accent: Rich green from logo plants/corn elements */
-  --accent: oklch(0.45 0.18 140); /* Vibrant green from logo decorations */
+  /* Verde de las hojas del logotipo */
+  --accent: oklch(0.5 0.17 145);
   --accent-foreground: oklch(1 0 0);
 
-  /* Destructive: Warm red from logo flower */
-  --destructive: oklch(0.55 0.22 15); /* Rich red from woman's flower */
+  /* Rojo de la flor del logotipo */
+  --destructive: oklch(0.56 0.21 22);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.9 0.01 85);
-  --input: oklch(0.97 0.005 85);
-  --ring: oklch(0.35 0.28 260); /* Same as primary blue */
+  --border: oklch(0.91 0.012 85);
+  --input: oklch(0.97 0.006 85);
+  --ring: oklch(0.4 0.27 264);
 
-  /* Chart colors using logo palette */
-  --chart-1: oklch(0.35 0.28 260); /* Royal blue */
-  --chart-2: oklch(0.45 0.18 140); /* Green */
-  --chart-3: oklch(0.55 0.22 15); /* Red */
-  --chart-4: oklch(0.75 0.05 45); /* Warm beige */
-  --chart-5: oklch(0.85 0.02 85); /* Light cream */
+  --chart-1: oklch(0.4 0.27 264);
+  --chart-2: oklch(0.5 0.17 145);
+  --chart-3: oklch(0.56 0.21 22);
+  --chart-4: oklch(0.75 0.05 45);
+  --chart-5: oklch(0.85 0.02 85);
 
-  --radius: 0.75rem;
+  /* Tonos de apoyo para dar ritmo a las secciones */
+  --navy: oklch(0.26 0.12 266);
+  --navy-deep: oklch(0.2 0.09 266);
+  --sky: oklch(0.955 0.03 258);
+  --cream: oklch(0.975 0.016 85);
+  --gold: oklch(0.8 0.165 82);
+  --whatsapp: oklch(0.72 0.19 150);
+
+  --radius: 1rem;
   --sidebar: oklch(0.99 0.005 85);
-  --sidebar-foreground: oklch(0.15 0.02 85);
-  --sidebar-primary: oklch(0.35 0.28 260);
+  --sidebar-foreground: oklch(0.18 0.035 265);
+  --sidebar-primary: oklch(0.4 0.27 264);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0.01 85);
-  --sidebar-accent-foreground: oklch(0.15 0.02 85);
-  --sidebar-border: oklch(0.9 0.01 85);
-  --sidebar-ring: oklch(0.35 0.28 260);
+  --sidebar-accent: oklch(0.96 0.012 85);
+  --sidebar-accent-foreground: oklch(0.18 0.035 265);
+  --sidebar-border: oklch(0.91 0.012 85);
+  --sidebar-ring: oklch(0.4 0.27 264);
 }
 
 .dark {
-  /* Updated dark mode to maintain logo color harmony */
-  --background: oklch(0.08 0.02 260); /* Dark blue tint */
+  --background: oklch(0.08 0.02 260);
   --foreground: oklch(0.95 0.01 85);
   --card: oklch(0.12 0.02 260);
   --card-foreground: oklch(0.95 0.01 85);
   --popover: oklch(0.12 0.02 260);
   --popover-foreground: oklch(0.95 0.01 85);
-  --primary: oklch(0.55 0.28 260); /* Lighter blue for dark mode */
+  --primary: oklch(0.55 0.28 260);
   --primary-foreground: oklch(0.08 0.02 260);
   --secondary: oklch(0.18 0.02 260);
   --secondary-foreground: oklch(0.95 0.01 85);
   --muted: oklch(0.18 0.02 260);
   --muted-foreground: oklch(0.65 0.02 85);
-  --accent: oklch(0.65 0.18 140); /* Brighter green for dark mode */
+  --accent: oklch(0.65 0.18 140);
   --accent-foreground: oklch(0.08 0.02 260);
-  --destructive: oklch(0.75 0.22 15); /* Brighter red for dark mode */
+  --destructive: oklch(0.75 0.22 15);
   --destructive-foreground: oklch(0.08 0.02 260);
   --border: oklch(0.18 0.02 260);
   --input: oklch(0.18 0.02 260);
@@ -87,6 +92,8 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: "Fraunces", "Georgia", "Times New Roman", serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -111,10 +118,21 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-sky: var(--sky);
+  --color-cream: var(--cream);
+  --color-gold: var(--gold);
+  --color-whatsapp: var(--whatsapp);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -123,16 +141,136 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 1px 2px oklch(0.2 0.05 265 / 0.04), 0 8px 24px -8px oklch(0.2 0.05 265 / 0.12);
+  --shadow-lift: 0 2px 4px oklch(0.2 0.05 265 / 0.05), 0 20px 40px -16px oklch(0.2 0.05 265 / 0.22);
+  --shadow-glow: 0 0 0 1px oklch(1 0 0 / 0.08), 0 24px 60px -20px oklch(0.4 0.27 264 / 0.55);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: oklch(0.4 0.27 264 / 0.18);
+  }
+  section[id],
+  [data-anchor] {
+    scroll-margin-top: 5.5rem;
+  }
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+    letter-spacing: -0.015em;
+  }
+  h1 em,
+  h2 em {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+  }
+  img {
+    @apply select-none;
+  }
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em];
+}
+
+@utility pattern-dots {
+  background-image: radial-gradient(currentColor 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+@utility pattern-weave {
+  background-image:
+    repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 14px);
+}
+
+@utility pattern-grid {
+  background-image:
+    linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility glass {
+  background: oklch(1 0 0 / 0.78);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+}
+
+@utility leader-dots {
+  background-image: radial-gradient(circle, oklch(0.75 0.02 265) 1px, transparent 1.2px);
+  background-size: 7px 2px;
+  background-repeat: repeat-x;
+  background-position: 0 70%;
+}
+
+/* Animación de aparición al hacer scroll. Solo se activa cuando hay JS. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

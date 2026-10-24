@@ -1,78 +1,163 @@
-import { MapPin, Phone, Instagram } from "lucide-react"
+import { MapPin, Phone, Instagram, MessageCircle, Star, ArrowUpRight } from "lucide-react"
+import { Stars } from "@/components/stars"
+import { business, maps, whatsapp, scheduleSummary } from "@/lib/business"
+
+const NAV_LINKS = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#nosotros", label: "Nosotros" },
+  { href: "#menu", label: "Menú" },
+  { href: "#desayunos", label: "Desayunos" },
+  { href: "#especiales", label: "Especiales de sábado" },
+  { href: "#postres-bebidas", label: "Postres y bebidas" },
+  { href: "#horarios", label: "Horarios" },
+  { href: "#opiniones", label: "Opiniones" },
+  { href: "#contacto", label: "Contacto" },
+]
 
 export function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="bg-foreground text-background py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8">
+    <footer className="relative overflow-hidden bg-navy-deep text-white">
+      <div className="absolute inset-0 pattern-dots text-white/[0.05]" aria-hidden="true" />
+      <div className="container relative mx-auto px-4 pb-28 pt-16 sm:pb-10">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
+          {/* Marca */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
+            <a href="#inicio" className="inline-flex items-center gap-3">
               <img
                 src="/casa-nancy-logo.jpg"
-                alt="Casa Nancy Logo"
-                className="h-12 w-12 rounded-full object-cover border-2 border-background/20"
+                alt=""
+                width={56}
+                height={56}
+                className="size-14 rounded-full object-cover ring-2 ring-white/30"
               />
-              <h3 className="text-2xl font-bold">Casa Nancy</h3>
-            </div>
-            <p className="text-background/80 mb-4 leading-relaxed">
-              Auténtico sabor salvadoreño en Santa Coloma de Gramenet. Tradición familiar desde el corazón de El
-              Salvador.
+              <span className="flex flex-col leading-tight">
+                <span className="font-display text-2xl font-semibold">Casa Nancy</span>
+                <span className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/60">
+                  Pupusería salvadoreña
+                </span>
+              </span>
+            </a>
+            <p className="mt-5 max-w-sm text-pretty leading-relaxed text-white/70">
+              Auténtico sabor salvadoreño en Santa Coloma de Gramenet. Tradición familiar y pupusas hechas al momento,
+              desde el corazón de El Salvador.
             </p>
-            <div className="flex space-x-4">
-              <a 
-                href="https://www.instagram.com/pupuseria_casa_nancy" 
-                target="_blank" 
+            <a
+              href={maps.reviews}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 py-2 pl-3 pr-4 transition hover:bg-white/10"
+            >
+              <Stars rating={business.rating.value} size="size-3.5" mutedClassName="text-white/20" />
+              <span className="text-sm">
+                <span className="font-semibold">{business.rating.display}</span>
+                <span className="text-white/60"> · {business.rating.count} reseñas en Google</span>
+              </span>
+            </a>
+            <div className="mt-5 flex gap-3">
+              <a
+                href={business.instagram.url}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition-colors cursor-pointer"
+                aria-label="Instagram de Casa Nancy"
+                className="flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="size-5" aria-hidden="true" />
+              </a>
+              <a
+                href={whatsapp.plain}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp de Casa Nancy"
+                className="flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+              >
+                <MessageCircle className="size-5" aria-hidden="true" />
+              </a>
+              <a
+                href={maps.reviews}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Casa Nancy en Google Maps"
+                className="flex size-10 items-center justify-center rounded-full bg-white/10 transition hover:bg-white/20"
+              >
+                <Star className="size-5" aria-hidden="true" />
               </a>
             </div>
           </div>
 
+          {/* Navegación */}
           <div>
-            <h4 className="font-semibold mb-4">Información de Contacto</h4>
-            <div className="space-y-3 text-background/80">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <div>
-                  <div>Carrer de la Mare de Déu de Montserrat, 16</div>
-                  <div>08922 Santa Coloma de Gramenet</div>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 flex-shrink-0" />
-                <span>+34 635 44 64 35</span>
-              </div>
-            </div>
+            <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60">Navegación</h4>
+            <ul className="mt-4 space-y-2.5">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-white/80 transition hover:text-white">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
+          {/* Contacto */}
           <div>
-            <h4 className="font-semibold mb-4">Horarios</h4>
-            <div className="space-y-2 text-background/80 text-sm">
-              <div className="flex justify-between">
-                <span>Miércoles - Viernes:</span>
-                <span>12:00-16:00, 19:00-22:00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Sábado:</span>
-                <span>12:00-17:00, 19:00-23:00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Domingo:</span>
-                <span>12:00-18:00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Lunes:</span>
-                <span>Cerrado</span>
-              </div>
-            </div>
+            <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60">Contacto</h4>
+            <ul className="mt-4 space-y-3 text-white/80">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a href={maps.directions} target="_blank" rel="noopener noreferrer" className="transition hover:text-white">
+                  {business.address.street}
+                  <br />
+                  {business.address.postalCode} {business.address.city}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a href={business.phone.mobileHref} className="transition hover:text-white">
+                  {business.phone.mobileIntl}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a href={business.phone.landlineHref} className="transition hover:text-white">
+                  {business.phone.landline} (fijo)
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Instagram className="size-4 shrink-0 text-gold" aria-hidden="true" />
+                <a
+                  href={business.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 transition hover:text-white"
+                >
+                  {business.instagram.handle}
+                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Horarios */}
+          <div>
+            <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60">Horarios</h4>
+            <dl className="mt-4 space-y-3 text-sm">
+              {scheduleSummary.map((row) => (
+                <div key={row.label} className="flex flex-col gap-0.5">
+                  <dt className="text-white/60">{row.label}</dt>
+                  <dd className="font-medium text-white/90">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 
-        <div className="border-t border-background/20 mt-8 pt-8 text-center text-background/60 text-sm">
-          <p>&copy; 2025 Casa Nancy - Pupusería. Todos los derechos reservados.</p>
-          <p className="mt-2">Auténtico sabor salvadoreño en Barcelona</p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/50 sm:flex-row sm:text-left">
+          <p>
+            © {year} {business.fullName}. Todos los derechos reservados.
+          </p>
+          <p>Auténtico sabor salvadoreño en Barcelona</p>
         </div>
       </div>
     </footer>

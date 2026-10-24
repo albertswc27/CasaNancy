@@ -1,85 +1,127 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, Quote } from "lucide-react"
+import { PenLine, ExternalLink } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { SectionHeading } from "@/components/section-heading"
+import { Reveal } from "@/components/reveal"
+import { Stars } from "@/components/stars"
+import { ReviewCard, type Review } from "@/components/review-card"
+import { business, maps } from "@/lib/business"
+
+const REVIEWS: Review[] = [
+  {
+    name: "SuperGirl Levenstein",
+    text: "Recientemente coordiné un intercambio gastronómico cultural para mi oficina y elegí a Casa Nancy para representar a El Salvador. Decir que 'la arrasó' sería quedarse corto. Pedimos una gran variedad de platillos, desde las pupusas (queso y frijoles) a la parrilla, perfectas, hasta los dulces y aterciopelados tamales de elote, curtido (picante y suave) y la crujiente yuca con costilla. ¡Nos comimos hasta el último bocado! ¡Nuestro equipo devoró la comida! Una de mis compañeras incluso se emocionó hasta las lágrimas con el queso blanco que sirvieron con la yuca, diciendo que sabía exactamente como 'en casa' y estaba desesperada por encontrar a su proveedor. En lo personal, compartí mi propia experiencia de adopción en El Salvador durante este almuerzo, y disfrutar de la comida de Nancy hizo que la experiencia fuera realmente completa. Se nota que todo está preparado con amor genuino y técnicas tradicionales. Si buscas la comida salvadoreña más auténtica en Barcelona, no busques más. Gracias, Nancy, por ayudarme a compartir mi herencia tan bellamente. ¡Sin duda volveremos!",
+    rating: 5,
+    meta: "Local Guide · 49 reseñas · 247 fotos",
+    timeAgo: "Hace un día",
+  },
+  {
+    name: "Damaris Avalos",
+    text: "El mejor caldo que he probado. Muy amable el personal, lo hacen sentir en casa.",
+    rating: 5,
+    meta: "Google Reviews",
+    timeAgo: "Hace una semana",
+  },
+  {
+    name: "Lucas",
+    text: "La mejor comida que he probado, un servicio muy atento, te tratan con amor y la comida súper buenaaaa. ¡Lo recomiendo mucho!",
+    rating: 5,
+    meta: "Google Reviews",
+    timeAgo: "Hace una semana",
+  },
+  {
+    name: "Herberth Gomez",
+    text: "¡Deliciosas! He probado pupusas en otros lugares en Barcelona y hasta el momento son las mejores, ¡sin dudarlo! Las revueltas buenísimas, y tienen de queso con loroco. ¡Definitivamente volveremos!",
+    rating: 5,
+    meta: "Local Guide · Barcelona",
+    timeAgo: "Hace 9 meses",
+  },
+]
 
 export function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Damaris Avalos",
-      text: "El mejor caldo que he probado. Muy amable el personal lo hacen sentir en casa.",
-      rating: 5,
-      location: "Google Reviews",
-      timeAgo: "Hace una semana",
-    },
-    {
-      name: "Lucas",
-      text: "La mejor comida que he probado, un servicio muy atento, te tratan con amor y la comida super buenaaaa. Lo recomiendo mucho!!",
-      rating: 5,
-      location: "Google Reviews",
-      timeAgo: "Hace una semana",
-    },
-    {
-      name: "Herberth Gomez",
-      text: "Deliciosas!!! He probado pupusas en otros lugares en Barcelona y hasta el momento son las mejores, sin dudarlo! Las revueltas buenísimas, y tienen de queso con loroco!!! Definitivamente volveremos!",
-      rating: 5,
-      location: "Local Guide • Barcelona",
-      timeAgo: "Hace 9 meses",
-    },
-    {
-      name: "SuperGirl Levenstein",
-      text: "Recientemente coordiné un intercambio gastronómico cultural para mi oficina y elegí a Casa Nancy para representar a El Salvador. Decir que 'la arrasó' sería quedarse corto. Pedimos una gran variedad de platillos, desde las pupusas (queso y frijoles) a la parrilla, perfectas, hasta los dulces y aterciopelados tamales de elote, curtido (picante y suave) y la crujiente yuca con costilla. ¡Nos comimos hasta el último bocado! ¡Nuestro equipo devoró la comida! Una de mis compañeras incluso se emocionó hasta las lágrimas con el queso blanco que sirvieron con la yuca, diciendo que sabía exactamente como 'en casa' y estaba desesperada por encontrar a su proveedor. (Las fotos no le hacen justicia, ya que tuve que mantener las cosas tapadas para que se calentaran hasta que comimos). En lo personal, compartí mi propia experiencia de adopción en El Salvador durante este almuerzo, y disfrutar de la comida de Nancy hizo que la experiencia fuera realmente completa. Se nota que todo está preparado con amor genuino y técnicas tradicionales. Si buscas la comida salvadoreña más auténtica en Barcelona, ​​no busques más. Gracias, Nancy, por ayudarme a compartir mi herencia tan bellamente. ¡Sin duda volveremos!",
-      rating: 5,
-      location: "Local Guide · 49 reseñas · 247 fotos",
-      timeAgo: "Hace un día",
-    },
-  ]
-
   return (
-    <section className="relative py-12 md:py-20 overflow-hidden">
-      {/* El Salvador flag inspired gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Lo Que Dicen Nuestros Clientes</h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            Más de 377 reseñas nos avalan como el mejor sabor salvadoreño de la zona
-          </p>
-        </div>
+    <section id="opiniones" className="relative overflow-hidden bg-navy text-white">
+      <div className="absolute inset-0 bg-gradient-to-b from-navy via-navy to-navy-deep" aria-hidden="true" />
+      <div className="absolute inset-0 pattern-weave text-white/[0.05]" aria-hidden="true" />
+      <div className="absolute -right-24 top-16 size-96 rounded-full bg-primary/40 blur-3xl" aria-hidden="true" />
+      <div className="absolute -left-24 bottom-0 size-80 rounded-full bg-gold/15 blur-3xl" aria-hidden="true" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="relative">
-              <CardContent className="p-4 md:p-6">
-                <Quote className="h-6 w-6 md:h-8 md:w-8 text-primary/20 mb-3 md:mb-4" />
-                <p className="text-muted-foreground mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
-                  "{testimonial.text}"
+      <div className="container relative mx-auto px-4 py-20 md:py-28">
+        <SectionHeading
+          tone="dark"
+          eyebrow="Opiniones"
+          title={
+            <>
+              Lo que dicen <em className="text-gold">quienes ya han venido</em>
+            </>
+          }
+          description={`Más de ${business.rating.count} reseñas en Google nos avalan como el sabor salvadoreño de referencia en la zona.`}
+        />
+
+        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
+          {/* Resumen de valoración */}
+          <Reveal className="self-start lg:sticky lg:top-28">
+            <div className="flex flex-col rounded-[2rem] border border-white/15 bg-white/10 p-7 backdrop-blur-sm md:p-9">
+              <div>
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60">
+                  Valoración en Google
                 </p>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <div>
-                    <div className="font-semibold text-sm md:text-base">{testimonial.name}</div>
-                    <div className="text-xs md:text-sm text-muted-foreground">{testimonial.location}</div>
-                    <div className="text-xs text-muted-foreground/70">{testimonial.timeAgo}</div>
-                  </div>
-                  <div className="flex items-center space-x-1 self-start sm:self-center">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 md:h-4 md:w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
+                <div className="mt-3 flex items-end gap-3">
+                  <span className="font-display text-7xl font-semibold leading-none md:text-8xl">
+                    {business.rating.display}
+                  </span>
+                  <span className="pb-2 text-lg text-white/60">/ 5</span>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <Stars rating={business.rating.value} size="size-6" mutedClassName="text-white/25" className="mt-4" />
+                <p className="mt-4 text-white/80">
+                  Basado en <span className="font-semibold text-white">{business.rating.count} reseñas</span> de
+                  clientes reales.
+                </p>
+              </div>
 
-        <div className="mt-8 md:mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 bg-muted rounded-full px-4 md:px-6 py-3">
-            <div className="flex items-center space-x-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-4 w-4 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
-              ))}
+              <div className="mt-7 border-t border-white/10 pt-6">
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60">
+                  Lo que más se repite
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {["Pupusas al momento", "Caldos y sopas", "Trato familiar", "Como en casa"].map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm text-white/85"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3">
+                <Button variant="inverted" size="lg" asChild>
+                  <a href={maps.reviews} target="_blank" rel="noopener noreferrer">
+                    <PenLine className="size-4" aria-hidden="true" />
+                    Escribir una reseña
+                  </a>
+                </Button>
+                <Button variant="outline-inverted" size="lg" asChild>
+                  <a href={maps.reviews} target="_blank" rel="noopener noreferrer">
+                    Ver todas en Google
+                    <ExternalLink className="size-4" aria-hidden="true" />
+                  </a>
+                </Button>
+              </div>
             </div>
-            <span className="font-semibold text-sm md:text-base">4.8/5</span>
-            <span className="text-muted-foreground text-xs md:text-sm">• 377 reseñas en Google</span>
+          </Reveal>
+
+          {/* Reseñas destacadas */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            {REVIEWS.map((review, i) => (
+              <Reveal
+                key={review.name}
+                delay={80 + i * 80}
+                className={i === 0 ? "sm:col-span-2" : undefined}
+              >
+                <ReviewCard review={review} index={i} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>

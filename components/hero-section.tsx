@@ -1,108 +1,162 @@
+import Image from "next/image"
+import { MapPin, MessageCircle, ChevronDown, Flame, PartyPopper } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Star, MapPin, Clock } from "lucide-react"
+import { Stars } from "@/components/stars"
+import { OpenStatusPill } from "@/components/open-status-pill"
+import { Reveal } from "@/components/reveal"
+import { business, whatsapp } from "@/lib/business"
 
 export function HeroSection() {
   return (
-    <section
-      id="inicio"
-      className="relative py-12 md:py-20 lg:py-32 overflow-hidden"
-    >
-      {/* El Salvador flag inspired gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-white to-blue-300/75"></div>
-      
-      <div className="absolute inset-0 opacity-5">
-        <img
-          src="/images/bandera-el-salvador.webp"
-          alt=""
-          className="w-full h-full object-cover filter grayscale-[20%] saturate-30"
-        />
-      </div>
+    <section id="inicio" className="relative -mt-16 overflow-hidden pt-16 md:-mt-[4.5rem] md:pt-[4.5rem]">
+      {/* Fondo: degradado inspirado en la bandera de El Salvador + textura suave */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sky via-background to-sky/60" aria-hidden="true" />
+      <div className="absolute inset-0 pattern-dots text-primary/[0.07]" aria-hidden="true" />
+      <div
+        className="absolute -right-32 -top-40 size-[34rem] rounded-full bg-primary/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-40 -left-24 size-[26rem] rounded-full bg-gold/20 blur-3xl"
+        aria-hidden="true"
+      />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="space-y-6 md:space-y-8 text-center lg:text-left order-first lg:order-first">
-            <div className="space-y-4">
-              <div className="flex items-center justify-center lg:justify-start space-x-3 md:space-x-4 mb-4 md:mb-6">
-                <img
-                  src="/casa-nancy-logo.jpg"
-                  alt="Casa Nancy - Auténtico Sabor Salvadoreño"
-                  className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover border-4 border-primary shadow-lg"
-                />
-                <div className="text-base md:text-lg font-medium text-primary">Auténtico Sabor Salvadoreño</div>
-              </div>
-
-              <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-balance">
-                <span className="text-primary">Casa Nancy</span>
-                <br />
-                <span className="text-foreground">Auténtico sabor</span>
-                <br />
-                <span className="text-accent">salvadoreño</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground text-pretty">
-                Pupusas caseras, platos tradicionales y el verdadero sabor de El Salvador en el corazón de Santa Coloma
-                de Gramenet.
+      <div className="container relative mx-auto px-4 pb-16 pt-10 md:pb-24 md:pt-16 lg:pb-28 lg:pt-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          {/* Texto */}
+          <div className="text-center lg:text-left">
+            <Reveal>
+              <p className="eyebrow justify-center text-accent lg:justify-start">
+                <span className="h-px w-6 bg-accent/60" aria-hidden="true" />
+                Pupusería · {business.city}
               </p>
-            </div>
+            </Reveal>
 
-            <div className="flex items-center justify-center lg:justify-start space-x-4 md:space-x-6">
-              <div className="flex items-center space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 md:h-5 md:w-5 fill-yellow-400 text-yellow-400" />
-                ))}
-                <span className="ml-2 text-sm font-medium">4.8/5 (377 reseñas)</span>
+            <Reveal delay={80}>
+              <h1 className="mt-5 text-balance text-[2.6rem] font-semibold leading-[1.02] text-foreground sm:text-5xl lg:text-[4.1rem]">
+                Auténtico sabor <em className="text-primary">salvadoreño</em>, hecho en casa
+              </h1>
+            </Reveal>
+
+            <Reveal delay={160}>
+              <p className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl lg:mx-0">
+                Pupusas hechas al momento, tamales, sopas de toda la vida y el verdadero sabor de El Salvador en el
+                corazón de Santa Coloma de Gramenet.
+              </p>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <a
+                href="#opiniones"
+                className="group mt-7 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-full border border-foreground/10 bg-white/70 py-2 pl-3 pr-4 shadow-soft backdrop-blur transition hover:border-primary/30 hover:shadow-lift lg:justify-start"
+              >
+                <Stars rating={business.rating.value} size="size-[18px]" />
+                <span className="font-display text-lg font-semibold text-foreground">{business.rating.display}</span>
+                <span className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">{business.rating.count}</span> reseñas en Google
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-gold/25 px-2.5 py-0.5 text-xs font-semibold text-foreground">
+                  <PartyPopper className="size-3.5" aria-hidden="true" />
+                  ¡Nuevo hito!
+                </span>
+              </a>
+            </Reveal>
+
+            <Reveal delay={320}>
+              <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <Button variant="whatsapp" size="xl" className="w-full sm:w-auto" asChild>
+                  <a href={whatsapp.reserve} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="size-5" aria-hidden="true" />
+                    Reservar por WhatsApp
+                  </a>
+                </Button>
+                <Button variant="outline" size="xl" className="w-full sm:w-auto" asChild>
+                  <a href="#menu">
+                    Ver el menú
+                    <ChevronDown className="size-4" aria-hidden="true" />
+                  </a>
+                </Button>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-              <Button 
-                size="lg" 
-                className="text-base md:text-lg px-6 md:px-8 w-full sm:w-auto"
-                asChild
-              >
-                <a href="#menu">Ver Nuestro Menú</a>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-base md:text-lg px-6 md:px-8 bg-transparent w-full sm:w-auto"
-                asChild
-              >
-                <a href="#contacto">
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                  Cómo Llegar
+            <Reveal delay={400}>
+              <div className="mt-7 flex flex-col items-center gap-3 text-sm text-muted-foreground sm:flex-row sm:justify-center lg:justify-start">
+                <OpenStatusPill />
+                <a
+                  href="#contacto"
+                  className="inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                >
+                  <MapPin className="size-4 text-primary" aria-hidden="true" />
+                  {business.address.street}
                 </a>
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-center lg:justify-start space-x-4 text-sm text-muted-foreground">
-              <div className="flex items-center space-x-1">
-                <Clock className="h-4 w-4" />
-                <span className="text-center lg:text-left">Abierto hoy: 12:00-16:00, 19:00-22:00</span>
               </div>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="relative order-last lg:order-last">
-            <div className="aspect-[4/3] md:aspect-square rounded-2xl overflow-hidden bg-muted max-w-sm mx-auto lg:max-w-none">
-              <img
-                src="/authentic-salvadoran-pupusas-on-traditional-plate-.jpg"
-                alt="Pupusas tradicionales de Casa Nancy"
-                className="w-full h-full object-cover"
+          {/* Imagen */}
+          <Reveal delay={200} className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative">
+              <div
+                className="absolute -inset-3 -rotate-2 rounded-[2.5rem] bg-primary/90 shadow-glow md:-inset-4"
+                aria-hidden="true"
               />
-            </div>
-            <div className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-card p-3 md:p-4 rounded-xl shadow-lg border border-primary/20">
-              <div className="flex items-center space-x-2 mb-2">
-                <img
-                  src="/casa-nancy-logo.jpg"
-                  alt="Casa Nancy"
-                  className="h-5 w-5 md:h-6 md:w-6 rounded-full object-cover"
+              <div
+                className="absolute -inset-3 rotate-3 rounded-[2.5rem] bg-gold/60 md:-inset-4"
+                aria-hidden="true"
+              />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2.2rem] bg-muted shadow-lift sm:aspect-square">
+                <Image
+                  src="/authentic-salvadoran-pupusas-on-traditional-plate-.jpg"
+                  alt="Pupusas recién hechas en Casa Nancy"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="text-xs md:text-sm font-medium text-primary">Especialidad</div>
+                <div
+                  className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/60 to-transparent"
+                  aria-hidden="true"
+                />
               </div>
-              <div className="text-base md:text-lg font-bold">Pupusas Caseras</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Hechas al momento</div>
+
+              {/* Tarjeta flotante: especialidad */}
+              <div className="absolute -bottom-5 -left-2 animate-float rounded-2xl border border-white/60 bg-white/95 p-3.5 shadow-lift backdrop-blur sm:-left-6 sm:p-4 xl:-left-10">
+                <div className="flex items-center gap-3">
+                  <span className="flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
+                    <Flame className="size-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      Nuestra especialidad
+                    </p>
+                    <p className="font-display text-base font-semibold leading-tight">Pupusas hechas al momento</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tarjeta flotante: valoración */}
+              <div className="absolute -right-2 -top-5 animate-float-slow rounded-2xl border border-white/60 bg-white/95 px-4 py-3 shadow-lift backdrop-blur sm:-right-6 xl:-right-10">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/casa-nancy-logo.jpg"
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="size-10 rounded-full object-cover ring-2 ring-primary/70"
+                  />
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-display text-lg font-semibold leading-none">{business.rating.display}</span>
+                      <Stars rating={business.rating.value} size="size-3.5" />
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {business.rating.count} reseñas · Google
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

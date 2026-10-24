@@ -1,116 +1,181 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import { Menu, X, Phone, MessageCircle, MapPin, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Phone, MapPin, Menu, X } from "lucide-react"
-import { useState } from "react"
+import { OpenStatusPill } from "@/components/open-status-pill"
+import { business, whatsapp } from "@/lib/business"
+import { cn } from "@/lib/utils"
+
+const NAV_LINKS = [
+  { href: "#inicio", label: "Inicio", id: "inicio" },
+  { href: "#nosotros", label: "Nosotros", id: "nosotros" },
+  { href: "#menu", label: "Menú", id: "menu" },
+  { href: "#especiales", label: "Especiales", id: "especiales" },
+  { href: "#horarios", label: "Horarios", id: "horarios" },
+  { href: "#opiniones", label: "Opiniones", id: "opiniones" },
+  { href: "#contacto", label: "Contacto", id: "contacto" },
+]
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [active, setActive] = useState("inicio")
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return
+    const sections = NAV_LINKS.map((l) => document.getElementById(l.id)).filter(Boolean) as HTMLElement[]
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible) setActive(visible.target.id)
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.2, 0.5] },
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsMenuOpen(false)
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [isMenuOpen])
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3 md:py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 md:space-x-4">
-            <div className="flex items-center space-x-2 md:space-x-3">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled || isMenuOpen ? "glass border-b border-foreground/8 shadow-soft" : "bg-transparent",
+      )}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+          <a href="#inicio" className="group flex shrink-0 items-center gap-3" aria-label="Casa Nancy, volver al inicio">
+            <span className="relative">
               <img
                 src="/casa-nancy-logo.jpg"
-                alt="Casa Nancy Logo"
-                className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover border-2 border-primary"
+                alt=""
+                width={48}
+                height={48}
+                className="size-10 rounded-full object-cover ring-2 ring-primary/80 ring-offset-2 ring-offset-background transition-transform duration-300 group-hover:scale-105 md:size-11"
               />
-              <div className="text-lg md:text-2xl font-bold text-primary">Casa Nancy</div>
-            </div>
-            <div className="hidden lg:flex items-center space-x-2 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4" />
-              <span>Santa Coloma de Gramenet</span>
-            </div>
-          </div>
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="whitespace-nowrap font-display text-xl font-semibold text-primary md:text-2xl">
+                Casa Nancy
+              </span>
+              <span className="hidden text-[0.65rem] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:block">
+                Pupusería salvadoreña
+              </span>
+            </span>
+          </a>
 
-          <nav className="hidden lg:flex items-center space-x-6">
-            <a href="#inicio" className="text-foreground hover:text-primary transition-colors">
-              Inicio
-            </a>
-            <a href="#nosotros" className="text-foreground hover:text-primary transition-colors">
-              Nosotros
-            </a>
-            <a href="#menu" className="text-foreground hover:text-primary transition-colors">
-              Menú
-            </a>
-            <a href="#horarios" className="text-foreground hover:text-primary transition-colors">
-              Horarios
-            </a>
-            <a href="#contacto" className="text-foreground hover:text-primary transition-colors">
-              Contacto
-            </a>
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-primary",
+                  active === link.id ? "text-primary" : "text-foreground/75",
+                )}
+              >
+                {link.label}
+                <span
+                  className={cn(
+                    "absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-primary transition-all duration-300",
+                    active === link.id ? "opacity-100" : "opacity-0",
+                  )}
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
           </nav>
 
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" className="hidden md:flex bg-transparent text-xs md:text-sm" asChild>
-              <a href="tel:+34635446435">
-                <Phone className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
-                <span className="hidden sm:inline">+34 635 44 64 35</span>
-                <span className="sm:hidden">Llamar</span>
+          <div className="flex items-center gap-2">
+            <OpenStatusPill compact className="hidden 2xl:inline-flex" />
+            <Button variant="outline" size="sm" className="hidden md:inline-flex" asChild>
+              <a href={business.phone.mobileHref}>
+                <Phone className="size-4" aria-hidden="true" />
+                {business.phone.mobileIntl}
               </a>
             </Button>
-            <Button size="sm" className="text-xs md:text-sm px-2 md:px-4" asChild>
-              <a href="https://wa.me/34635446435?text=Hola!%20Me%20gustar%C3%ADa%20reservar%20mesa%20en%20Casa%20Nancy.%20%C2%BFTienen%20disponibilidad%3F" target="_blank" rel="noopener noreferrer">
-                <span className="hidden sm:inline">Reservar Mesa</span>
+            <Button variant="whatsapp" size="sm" asChild>
+              <a href={whatsapp.reserve} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="size-4" aria-hidden="true" />
+                <span className="hidden sm:inline">Reservar mesa</span>
                 <span className="sm:hidden">Reservar</span>
               </a>
             </Button>
-
-            <Button variant="ghost" size="sm" className="lg:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              aria-expanded={isMenuOpen}
+              aria-controls="menu-movil"
+              aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            >
+              {isMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
             </Button>
           </div>
         </div>
 
         {isMenuOpen && (
-          <nav className="lg:hidden mt-4 pb-4 border-t border-border pt-4">
-            <div className="flex flex-col space-y-3">
-              <a
-                href="#inicio"
-                className="text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Inicio
-              </a>
-              <a
-                href="#nosotros"
-                className="text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Nosotros
-              </a>
-              <a
-                href="#menu"
-                className="text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Menú
-              </a>
-              <a
-                href="#horarios"
-                className="text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Horarios
-              </a>
-              <a
-                href="#contacto"
-                className="text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contacto
-              </a>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground pt-2 border-t border-border">
-                <MapPin className="h-4 w-4" />
-                <span>Santa Coloma de Gramenet</span>
+          <nav
+            id="menu-movil"
+            aria-label="Menú móvil"
+            className="animate-in fade-in slide-in-from-top-2 border-t border-foreground/8 pb-5 pt-3 duration-200 lg:hidden"
+          >
+            <ul className="flex flex-col">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={cn(
+                      "flex items-center justify-between rounded-xl px-3 py-3 text-base font-medium transition-colors hover:bg-primary/5 hover:text-primary",
+                      active === link.id ? "text-primary" : "text-foreground/85",
+                    )}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3 flex flex-col gap-3 border-t border-foreground/8 pt-4">
+              <OpenStatusPill className="self-start" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="size-4 text-primary" aria-hidden="true" />
+                <span>
+                  {business.address.street}, {business.address.city}
+                </span>
               </div>
-              <Button variant="outline" size="sm" className="md:hidden bg-transparent justify-start">
-                <Phone className="h-4 w-4 mr-2" />
-                +34 635 44 64 35
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <a href={business.phone.mobileHref}>
+                    <Phone className="size-4" aria-hidden="true" />
+                    {business.phone.mobileIntl}
+                  </a>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href={business.instagram.url} target="_blank" rel="noopener noreferrer">
+                    <Instagram className="size-4" aria-hidden="true" />
+                    Instagram
+                  </a>
+                </Button>
+              </div>
             </div>
           </nav>
         )}
