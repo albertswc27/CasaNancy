@@ -158,6 +158,15 @@ export function Footer() {
             © {year} {business.fullName}. Todos los derechos reservados.
           </p>
           <p>Auténtico sabor salvadoreño en Barcelona</p>
+          <p>
+            Diseño web:{" "}
+            <a
+              href="https://www.astrolanding.es/proyectos/casa-nancy"
+              className="text-white/70 underline underline-offset-2 transition hover:text-white"
+            >
+              AstroLanding
+            </a>
+          </p>
         </div>
       </div>
     </footer>
